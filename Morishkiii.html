@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Morishkiii</title>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           BACKGROUND IMAGE
+           
+           CHANGE "background.jpg" TO YOUR IMAGE
+        ===================================================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+
+            background-image: url("moors.jpg");
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+
+        /* Dark overlay over background */
+
+        .background::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.58),
+                    rgba(0, 0, 0, 0.72)
+                );
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            position: relative;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            width: 100%;
+
+            padding: 30px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+
+            background: rgba(0,0,0,0.18);
+
+            backdrop-filter: blur(10px);
+        }
+
+
+        .logo {
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .header-text {
+            color: rgba(255,255,255,0.55);
+
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        main {
+            flex: 1;
+
+            min-height: calc(100vh - 120px);
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+
+            position: relative;
+
+            padding: 60px 0;
+        }
+
+
+        /* =====================================================
+           ARTIST SECTION
+        ===================================================== */
+
+        .artist-section {
+            text-align: center;
+
+            position: relative;
+
+            z-index: 3;
+
+            margin-bottom: 70px;
+        }
+
+
+        .small-title {
+            color: rgba(255,255,255,0.55);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            letter-spacing: 6px;
+
+            margin-bottom: 20px;
+
+            text-transform: uppercase;
+        }
+
+
+        .artist-name {
+            color: white;
+
+            font-size: clamp(70px, 12vw, 180px);
+
+            font-weight: 900;
+
+            line-height: 0.85;
+
+            letter-spacing: -7px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 15px 50px rgba(0,0,0,0.7);
+        }
+
+
+        /* =====================================================
+           CENTER MOVING TEXT
+        ===================================================== */
+
+        .announcement {
+            position: relative;
+
+            width: 100%;
+
+            overflow: hidden;
+
+            padding: 25px 0;
+
+            border-top: 1px solid rgba(255,0,0,0.35);
+            border-bottom: 1px solid rgba(255,0,0,0.35);
+
+            background:
+                rgba(0,0,0,0.48);
+
+            backdrop-filter: blur(12px);
+
+            z-index: 5;
+        }
+
+
+        .announcement-track {
+            width: max-content;
+
+            display: flex;
+
+            white-space: nowrap;
+
+            animation:
+                announcementMove
+                18s
+                linear
+                infinite;
+        }
+
+
+        .announcement-text {
+            color: red;
+
+            font-size: clamp(30px, 5vw, 75px);
+
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            text-transform: uppercase;
+
+            padding-right: 80px;
+
+            text-shadow:
+                0 0 20px rgba(255,0,0,0.35);
+        }
+
+
+        @keyframes announcementMove {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION SECTION
+        ===================================================== */
+
+        .navigation-section {
+
+            width: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 65px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        .navigation {
+
+            width: min(900px, 90%);
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 8px;
+
+            padding: 10px;
+
+            background:
+                rgba(0,0,0,0.48);
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.5);
+        }
+
+
+        /* =====================================================
+           NAVIGATION LINKS
+        ===================================================== */
+
+        .navigation a {
+
+            min-height: 70px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 15px 10px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 2px;
+
+            border:
+                1px solid transparent;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .navigation a:hover {
+
+            color: white;
+
+            background: red;
+
+            border-color: red;
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 12px 30px rgba(255,0,0,0.3);
+        }
+
+
+        /* =====================================================
+           BUY TICKETS SPECIAL BUTTON
+        ===================================================== */
+
+        .navigation .tickets {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8c0000,
+                    #d00000
+                );
+
+            border-color:
+                rgba(255,255,255,0.15);
+        }
+
+
+        .navigation .tickets:hover {
+
+            background: white;
+
+            color: black;
+
+            border-color: white;
+
+            box-shadow:
+                0 12px 35px rgba(255,255,255,0.15);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            width: 100%;
+
+            padding: 25px 50px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color:
+                rgba(255,255,255,0.35);
+
+            font-size: 9px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            border-top:
+                1px solid rgba(255,255,255,0.1);
+        }
+
+
+        .footer-center {
+
+            color: red;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            header {
+
+                padding:
+                    25px 25px;
+            }
+
+
+            .header-text {
+
+                display: none;
+            }
+
+
+            main {
+
+                padding:
+                    70px 0;
+            }
+
+
+            .artist-section {
+
+                margin-bottom:
+                    50px;
+            }
+
+
+            .artist-name {
+
+                font-size:
+                    22vw;
+
+                letter-spacing:
+                    -4px;
+            }
+
+
+            .announcement {
+
+                padding:
+                    20px 0;
+            }
+
+
+            .announcement-text {
+
+                font-size:
+                    34px;
+            }
+
+
+            .navigation-section {
+
+                margin-top:
+                    50px;
+            }
+
+
+            .navigation {
+
+                width:
+                    90%;
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 7px;
+            }
+
+
+            .navigation a {
+
+                min-height:
+                    60px;
+            }
+
+
+            .navigation .tickets {
+
+                grid-column:
+                    span 2;
+            }
+
+
+            footer {
+
+                padding:
+                    20px 25px;
+            }
+
+
+            .footer-center {
+
+                display:
+                    none;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 450px) {
+
+            .logo {
+
+                font-size:
+                    11px;
+
+                letter-spacing:
+                    3px;
+            }
+
+
+            .artist-name {
+
+                font-size:
+                    24vw;
+            }
+
+
+            .announcement-text {
+
+                font-size:
+                    28px;
+            }
+
+
+            .navigation a {
+
+                font-size:
+                    9px;
+
+                letter-spacing:
+                    1.5px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND IMAGE
+
+         Replace moors.jpg with your own image.
+    ====================================================== -->
+
+    <div class="background"></div>
+
+
+    <div class="page">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header>
+
+            <div class="logo">
+                MORISHKIII
+            </div>
+
+            <div class="header-text">
+                BLOEMFONTEIN • SOUTH AFRICA
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             MAIN CONTENT
+        ================================================== -->
+
+        <main>
+
+
+            <!-- =============================================
+                 ARTIST NAME
+            ============================================== -->
+
+            <section class="artist-section">
+
+                <div class="small-title">
+                    WAZZA • BLUES ACADEMY • MOORISH
+                </div>
+
+                <h1 class="artist-name">
+                    MORISHKIII
+                </h1>
+
+            </section>
+
+
+            <!-- =============================================
+                 CENTER ANNOUNCEMENT
+            ============================================== -->
+
+            <section class="announcement">
+
+                <div class="announcement-track">
+
+                    <div class="announcement-text">
+                        FROM BLOEM 2 BILLBOARD — COMING OCTOBER 30
+                    </div>
+
+                    <div class="announcement-text">
+                        FROM BLOEM 2 BILLBOARD — COMING OCTOBER 30
+                    </div>
+
+                    <div class="announcement-text">
+                        FROM BLOEM 2 BILLBOARD — COMING OCTOBER 30
+                    </div>
+
+                    <div class="announcement-text">
+                        FROM BLOEM 2 BILLBOARD — COMING OCTOBER 30
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 NAVIGATION
+            ============================================== -->
+
+            <section class="navigation-section">
+
+                <nav class="navigation">
+
+
+                    <!-- YOUTUBE -->
+
+                    <a
+                        href="https://www.youtube.com/@morishkiii"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        YOUTUBE
+                    </a>
+
+
+                    <!-- APPLE MUSIC -->
+
+                    <a
+                        href="https://music.apple.com/us/artist/morishkiii/1715985890"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        APPLE MUSIC
+                    </a>
+
+
+                    <!-- SPOTIFY -->
+
+                    <a
+                        href="https://open.spotify.com/artist/3GNsi1YkC5GqKNqOJ8rJzH?si=x4rhKB5sSdegylDUr8hz9A"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        SPOTIFY
+                    </a>
+
+
+                    <!-- PRE-SAVE -->
+
+                    <a
+                        href="https://label-caster.ffm.to/1dr3l1ryao?utm_id=97758_v0_s00_e0_tv4_a1demonegfxd76"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        PRE-SAVE
+                    </a>
+
+
+                    <!-- BUY TICKETS -->
+
+                    <a
+                        class="tickets"
+                        href="https://computicket-boxoffice.com/e/carte-gala-26-ocWMfu"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        BUY TICKETS
+                    </a>
+
+
+                </nav>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <div>
+                © 2026 MORISHKIII
+            </div>
+
+            <div class="footer-center">
+                COMING OCTOBER
+            </div>
+
+            <div>
+                FROM BLOEM 2 BILLBOARD
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</body>
+</html>
